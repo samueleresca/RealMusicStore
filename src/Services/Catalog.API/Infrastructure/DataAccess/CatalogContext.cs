@@ -11,13 +11,14 @@ namespace Catalog.API.Infrastructure.DataAccess
         public CatalogContext(DbContextOptions<CatalogContext> options) : base(options)
         {
         }
+
         public DbSet<CatalogTrack> CatalogTracks { get; set; }
         public DbSet<CatalogArtist> CatalogArtists { get; set; }
         public DbSet<Genre> Genres { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            builder.ApplyConfiguration(new CatalogArtitstEntityConf())
+            modelBuilder.ApplyConfiguration(new CatalogArtitstEntityConf())
                    .ApplyConfiguration(new CatalogGenreEntityConf())
                    .ApplyConfiguration(new CatalogTrackEntityConf());
         }

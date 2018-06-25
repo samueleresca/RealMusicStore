@@ -7,6 +7,7 @@
   <ItemGroup>
     <Folder Include="Infrastructure\Configurations\" />
     <Folder Include="wwwroot\" />
+    <Folder Include="Infrastructure\Repositories\" />
   </ItemGroup>
 
   <ItemGroup>
