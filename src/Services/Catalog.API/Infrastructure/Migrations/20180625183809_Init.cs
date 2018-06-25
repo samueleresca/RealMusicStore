@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Catalog.API.Migrations
+namespace Catalog.API.Infrastructure.Migrations
 {
     public partial class Init : Migration
     {
