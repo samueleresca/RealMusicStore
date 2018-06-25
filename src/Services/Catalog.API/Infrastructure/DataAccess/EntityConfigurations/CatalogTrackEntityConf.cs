@@ -19,8 +19,15 @@ namespace Catalog.API.Infrastructure.DataAccess.EntityConfigurations
                 .IsRequired()
                 .HasMaxLength(50);
 
-            builder.Property(ci => ci.CatalogArtist)
-                .IsRequired(true);
+
+            builder.HasOne(ci => ci.Artist)
+                .WithMany()
+                .HasForeignKey(ci => ci.CatalogArtistId)
+                   .IsRequired();
+
+            builder.HasOne(ci => ci.Genre)
+             .WithMany()
+             .HasForeignKey(ci => ci.GenreId);
 
             //builder.Property(ci => ci.PictureUri)
             //    .IsRequired(false);

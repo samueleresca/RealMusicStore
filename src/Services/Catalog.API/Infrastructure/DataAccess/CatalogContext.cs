@@ -29,7 +29,7 @@ namespace Catalog.API.Infrastructure.DataAccess
         public CatalogContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<CatalogContext>()
-                .UseSqlServer("Server=.;Initial Catalog=Microsoft.eShopOnContainers.Services.CatalogDb;Integrated Security=true");
+                .UseSqlServer("Data Source=localhost,1433;Initial Catalog=ServicePersistence;Integrated Security=False;User ID=sa;Password=P@55w0rd");
 
             return new CatalogContext(optionsBuilder.Options);
         }
