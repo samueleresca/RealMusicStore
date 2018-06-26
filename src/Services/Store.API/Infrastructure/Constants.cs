@@ -1,5 +1,4 @@
-﻿using System;
-namespace Catalog.API.Infrastructure
+﻿namespace Store.API.Infrastructure
 {
     public static class Constants
     {

@@ -1,15 +1,15 @@
-﻿using Catalog.API.Model;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Store.API.Models;
 
-namespace Catalog.API.Infrastructure.DataAccess.EntityConfigurations
+namespace Store.API.Infrastructure.DataAccess.EntityConfigurations
 {
-    class CatalogTrackEntityConf
-        : IEntityTypeConfiguration<CatalogTrack>
+    class StoreTrackEntityConf
+        : IEntityTypeConfiguration<StoreViynl>
     {
-        public void Configure(EntityTypeBuilder<CatalogTrack> builder)
+        public void Configure(EntityTypeBuilder<StoreViynl> builder)
         {
-            builder.ToTable("Catalog");
+            builder.ToTable("StoreTrack");
 
             builder.Property(ci => ci.Id)
                 .ForSqlServerUseSequenceHiLo("catalog_hilo")

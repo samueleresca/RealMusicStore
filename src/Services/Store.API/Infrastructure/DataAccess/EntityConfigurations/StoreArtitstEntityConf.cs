@@ -1,15 +1,15 @@
-﻿using Catalog.API.Model;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Store.API.Models;
 
-namespace Catalog.API.Infrastructure.DataAccess.EntityConfigurations
+namespace Store.API.Infrastructure.DataAccess.EntityConfigurations
 {
-    class CatalogArtitstEntityConf
-        : IEntityTypeConfiguration<CatalogArtist>
+    class StoreArtitstEntityConf
+        : IEntityTypeConfiguration<StoreArtist>
     {
-        public void Configure(EntityTypeBuilder<CatalogArtist> builder)
+        public void Configure(EntityTypeBuilder<StoreArtist> builder)
         {
-            builder.ToTable("CatalogArtist");
+            builder.ToTable("StoreArtist");
 
             builder.HasKey(ci => ci.Id);
 
