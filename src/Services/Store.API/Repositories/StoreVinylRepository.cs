@@ -22,6 +22,8 @@ namespace Store.API.Repositories
         {
             return await _dbContext.StoreTracks
                 .AsNoTracking()
+                .Include(_ => _.Artist)
+                .Include(_ => _.Genre)
                 .ToListAsync();
         }
 
@@ -29,19 +31,25 @@ namespace Store.API.Repositories
         {
             return await _dbContext.StoreTracks
                 .AsNoTracking()
-                .Where(filter).ToListAsync();
+                .Where(filter)
+                .Include(_ => _.Artist)
+                .ToListAsync();
         }
 
         public async Task<StoreViynl> GetById(int id)
         {
-            return await _dbContext.StoreTracks.AsNoTracking()
+            return await _dbContext
+                .StoreTracks
+                .AsNoTracking()
+                .Include(_=>_.Artist)
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 
         public async Task<StoreViynl> Create(StoreViynl entity)
         {
             if (entity == null) throw new Exception("Entity cannot be null");
-            var result = await _dbContext.StoreTracks.AddAsync(entity);
+            var result = await _dbContext
+                .StoreTracks.AddAsync(entity);
 
             await _dbContext.SaveChangesAsync();
 

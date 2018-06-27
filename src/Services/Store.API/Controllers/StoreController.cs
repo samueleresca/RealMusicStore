@@ -174,7 +174,7 @@ namespace Store.API.Controllers
         //}
 
         //PUT api/v1/[controller]/items
-        [Route("/api/vinyls/{id}")]
+        [Route("/api/vinyls/{id:int}")]
         [HttpPut]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.Created)]
@@ -206,7 +206,7 @@ namespace Store.API.Controllers
         }
 
         //DELETE api/v1/[controller]/id
-        [Route("/api/vinyls/{id}")]
+        [Route("/api/vinyls/{id:int}")]
         [HttpDelete]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> DeleteProduct(int id)
