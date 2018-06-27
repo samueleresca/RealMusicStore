@@ -9,7 +9,7 @@ namespace Store.API.Infrastructure.DataAccess.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Genre> builder)
         {
-            builder.ToTable("Genre");
+            builder.ToTable("StoreGenre");
 
             builder.Property(ci => ci.Id)
                 .ForSqlServerUseSequenceHiLo("genre_hilo")

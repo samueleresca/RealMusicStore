@@ -60,10 +60,10 @@ namespace Store.API.Infrastructure.DataAccess
         {
             return new List<StoreViynl>
             {
-                new StoreViynl { CatalogArtistId = 1, GenreId = 1 , AvailableStock = 100, Title = "DAMN." },
-                new StoreViynl { CatalogArtistId = 1, GenreId = 1 , AvailableStock = 100, Title = "Section.80" },
-                new StoreViynl { CatalogArtistId = 1, GenreId = 1 , AvailableStock = 100, Title = "good kid maad city" },
-                new StoreViynl { CatalogArtistId = 3, GenreId = 3 , AvailableStock = 100, Title = "Nuvole bianche" },
+                new StoreViynl { ArtistId = 1, GenreId = 1 , AvailableStock = 100, Title = "DAMN." },
+                new StoreViynl { ArtistId = 1, GenreId = 1 , AvailableStock = 100, Title = "Section.80" },
+                new StoreViynl { ArtistId = 1, GenreId = 1 , AvailableStock = 100, Title = "good kid maad city" },
+                new StoreViynl { ArtistId = 3, GenreId = 3 , AvailableStock = 100, Title = "Nuvole bianche" },
             };
         }
 

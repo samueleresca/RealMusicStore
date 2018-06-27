@@ -4,12 +4,12 @@ using Store.API.Models;
 
 namespace Store.API.Infrastructure.DataAccess.EntityConfigurations
 {
-    class StoreTrackEntityConf
+    class StoreVinylEntityConf
         : IEntityTypeConfiguration<StoreViynl>
     {
         public void Configure(EntityTypeBuilder<StoreViynl> builder)
         {
-            builder.ToTable("StoreTrack");
+            builder.ToTable("StoreVinyl");
 
             builder.Property(ci => ci.Id)
                 .ForSqlServerUseSequenceHiLo("catalog_hilo")
@@ -22,8 +22,7 @@ namespace Store.API.Infrastructure.DataAccess.EntityConfigurations
 
             builder.HasOne(ci => ci.Artist)
                 .WithMany()
-                .HasForeignKey(ci => ci.CatalogArtistId)
-                   .IsRequired();
+                .HasForeignKey(ci => ci.ArtistId);
 
             builder.HasOne(ci => ci.Genre)
              .WithMany()

@@ -19,7 +19,7 @@ namespace Store.API.Infrastructure.DataAccess
         {
             modelBuilder.ApplyConfiguration(new StoreArtitstEntityConf())
                    .ApplyConfiguration(new StoreGenreEntityConf())
-                   .ApplyConfiguration(new StoreTrackEntityConf());
+                   .ApplyConfiguration(new StoreVinylEntityConf());
         }
     }
 

@@ -1,4 +1,7 @@
-﻿namespace Store.API.Models
+﻿using System.Collections;
+using System.Collections.Generic;
+
+namespace Store.API.Models
 {
     public class Genre
     {
@@ -6,5 +9,6 @@
         public string Description { get; set; }
         public string Title { get; set; }
         public bool IsDisabled { get; set; }
+        public virtual ICollection<StoreArtist> Vinyls { get; set; }
     }
 }
