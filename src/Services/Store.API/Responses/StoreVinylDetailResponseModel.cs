@@ -1,6 +1,12 @@
-﻿namespace Store.API.Models
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Store.API.Models;
+
+namespace Store.API.Responses
 {
-    public class StoreViynl
+    public class StoreVinylDetailResponseModel
     {
         public int Id { get; set; }
         public string Title { get; set; }
