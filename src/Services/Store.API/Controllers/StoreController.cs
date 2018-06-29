@@ -27,8 +27,8 @@ namespace Store.API.Controllers
 
         // GET api/v1/[controller]/items[?pageSize=3&pageIndex=10]
         [HttpGet("/api/vinyls")]
-        [ProducesResponseType(typeof(PaginationResponseModel<StoreViynl>), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(IEnumerable<StoreViynl>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(PaginationResponseModel<StoreVinylListResponseModel>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<StoreVinylListResponseModel>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetAll([FromQuery]int pageSize = 10, [FromQuery]int pageIndex = 0, [FromQuery] string ids = null)
         {
             if (!string.IsNullOrEmpty(ids))
@@ -43,7 +43,7 @@ namespace Store.API.Controllers
                 .Paginate(pageIndex, pageSize);
 
             var model = new PaginationResponseModel<StoreVinylListResponseModel>(
-                pageIndex, pageSize, totalItems, _autoMapper.Map<IEnumerable<StoreViynl>, IEnumerable<StoreVinylListResponseModel>>(itemsOnPage));
+                pageIndex, pageSize, totalItems, _autoMapper.Map<IEnumerable<StoreVinylListResponseModel>>(itemsOnPage));
 
             return Ok(model);
         }
@@ -63,7 +63,7 @@ namespace Store.API.Controllers
 
             if (item.Any())
             {
-                return Ok(_autoMapper.Map<IEnumerable<StoreViynl>, IEnumerable<StoreVinylDetailResponseModel>>(item));
+                return Ok(_autoMapper.Map<IEnumerable<StoreVinylDetailResponseModel>>(item));
             }
 
             return NotFound();
@@ -84,34 +84,10 @@ namespace Store.API.Controllers
 
         }
 
-        // GET api/v1/[controller]/items/type/1/brand/null[?pageSize=3&pageIndex=10]
-        [HttpGet]
-        [Route("/api/vinyls/artist/{artistId}")]
-        [ProducesResponseType(typeof(PaginationResponseModel<StoreViynl>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetByReferencesId(int? artistId,  [FromQuery]int pageSize = 10, [FromQuery]int pageIndex = 0)
-        {
-            if (!artistId.HasValue)
-            {
-                return NotFound();
-            }
-
-            var results = await _storeViynlRepository.Find(ci => ci.ArtistId == artistId);
-
-            var totalItems = results
-                .LongCount();
-
-            var itemsOnPage = results.AsEnumerable()
-                .Paginate(pageIndex, pageSize);
-
-            var model = new PaginationResponseModel<StoreVinylDetailResponseModel>(
-                pageIndex, pageSize, totalItems, _autoMapper.Map<IEnumerable<StoreViynl>, IEnumerable<StoreVinylDetailResponseModel>>(itemsOnPage));
-
-            return Ok(model);
-        }
 
         [HttpGet]
         [Route("/api/vinyls/genre/{genreId}")]
-        [ProducesResponseType(typeof(PaginationResponseModel<StoreViynl>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(PaginationResponseModel<StoreVinylDetailResponseModel>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetByGenreReferencesId(int? genreId, [FromQuery]int pageSize = 10, [FromQuery]int pageIndex = 0)
         {
             if (!genreId.HasValue)
@@ -129,11 +105,26 @@ namespace Store.API.Controllers
                 .ToList();
 
             var model = new PaginationResponseModel<StoreVinylDetailResponseModel>(
-                pageIndex, pageSize, totalItems, _autoMapper.Map<IEnumerable<StoreViynl>, IEnumerable<StoreVinylDetailResponseModel>>(itemsOnPage));
+                pageIndex, pageSize, totalItems, _autoMapper.Map<IEnumerable<StoreVinylDetailResponseModel>>(itemsOnPage));
 
             return Ok(model);
         }
 
+
+        //POST api/v1/[controller]/items
+        [Route("/api/vinyls")]
+        [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.Created)]
+        public async Task<IActionResult> CreateProduct([FromBody]CreateVinylRequest product)
+        {
+            if (product == null)
+            {
+                return BadRequest();
+            }
+
+            var result = await _storeViynlRepository.Create(_autoMapper.Map<StoreViynl>(product));
+            return CreatedAtAction(nameof(GetItemById), new { id = result.Id }, null);
+        }
 
         //PUT api/v1/[controller]/items
         [Route("/api/vinyls/{id:int}")]
@@ -149,23 +140,14 @@ namespace Store.API.Controllers
                 return NotFound(new { Message = $"Item with id {id} not found." });
             }
             // Update current product
-            catalogItem = _autoMapper.Map<UpdateVinylRequest, StoreViynl>(productToUpdate);
+            catalogItem = _autoMapper.Map<StoreViynl>(productToUpdate);
 
             catalogItem.Id = id;
             await _storeViynlRepository.Update(catalogItem);
 
-            return CreatedAtAction(nameof(this.GetItemById), new { id }, null);
+            return CreatedAtAction(nameof(GetItemById) , new { id }, null);
         }
 
-        //POST api/v1/[controller]/items
-        [Route("/api/vinyls")]
-        [HttpPost]
-        [ProducesResponseType((int)HttpStatusCode.Created)]
-        public async Task<IActionResult> CreateProduct([FromBody]CreateVinylRequest product)
-        {
-            var result = await _storeViynlRepository.Create(_autoMapper.Map<CreateVinylRequest, StoreViynl>(product));
-            return CreatedAtAction(nameof(GetItemById), new { id = result.Id }, null);
-        }
 
         //DELETE api/v1/[controller]/id
         [Route("/api/vinyls/{id:int}")]

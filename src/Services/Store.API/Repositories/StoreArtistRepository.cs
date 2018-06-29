@@ -34,7 +34,10 @@ namespace Store.API.Repositories
 
         public async Task<StoreArtist> GetById(int id)
         {
-            return await _dbContext.StoreArtists.AsNoTracking()
+            return await _dbContext
+                .StoreArtists
+                .AsNoTracking()
+                .Include(_ => _.Vinyls)
                 .FirstOrDefaultAsync(e => e.Id == id);
         }
 
