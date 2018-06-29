@@ -7,45 +7,45 @@ namespace Store.API.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_StoreArtist_Genre_GenreId",
-                table: "StoreArtist");
+                "FK_StoreArtist_Genre_GenreId",
+                "StoreArtist");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_StoreTrack_Genre_GenreId",
-                table: "StoreTrack");
+                "FK_StoreTrack_Genre_GenreId",
+                "StoreTrack");
 
             migrationBuilder.DropPrimaryKey(
-                name: "PK_Genre",
-                table: "Genre");
+                "PK_Genre",
+                "Genre");
 
             migrationBuilder.RenameTable(
-                name: "Genre",
+                "Genre",
                 newName: "StoreGenre");
 
             migrationBuilder.AlterColumn<int>(
-                name: "GenreId",
-                table: "StoreTrack",
+                "GenreId",
+                "StoreTrack",
                 nullable: true,
                 oldClrType: typeof(int));
 
             migrationBuilder.AddPrimaryKey(
-                name: "PK_StoreGenre",
-                table: "StoreGenre",
-                column: "Id");
+                "PK_StoreGenre",
+                "StoreGenre",
+                "Id");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_StoreArtist_StoreGenre_GenreId",
-                table: "StoreArtist",
-                column: "GenreId",
-                principalTable: "StoreGenre",
+                "FK_StoreArtist_StoreGenre_GenreId",
+                "StoreArtist",
+                "GenreId",
+                "StoreGenre",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_StoreTrack_StoreGenre_GenreId",
-                table: "StoreTrack",
-                column: "GenreId",
-                principalTable: "StoreGenre",
+                "FK_StoreTrack_StoreGenre_GenreId",
+                "StoreTrack",
+                "GenreId",
+                "StoreGenre",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
         }
@@ -53,46 +53,46 @@ namespace Store.API.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_StoreArtist_StoreGenre_GenreId",
-                table: "StoreArtist");
+                "FK_StoreArtist_StoreGenre_GenreId",
+                "StoreArtist");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_StoreTrack_StoreGenre_GenreId",
-                table: "StoreTrack");
+                "FK_StoreTrack_StoreGenre_GenreId",
+                "StoreTrack");
 
             migrationBuilder.DropPrimaryKey(
-                name: "PK_StoreGenre",
-                table: "StoreGenre");
+                "PK_StoreGenre",
+                "StoreGenre");
 
             migrationBuilder.RenameTable(
-                name: "StoreGenre",
+                "StoreGenre",
                 newName: "Genre");
 
             migrationBuilder.AlterColumn<int>(
-                name: "GenreId",
-                table: "StoreTrack",
+                "GenreId",
+                "StoreTrack",
                 nullable: false,
                 oldClrType: typeof(int),
                 oldNullable: true);
 
             migrationBuilder.AddPrimaryKey(
-                name: "PK_Genre",
-                table: "Genre",
-                column: "Id");
+                "PK_Genre",
+                "Genre",
+                "Id");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_StoreArtist_Genre_GenreId",
-                table: "StoreArtist",
-                column: "GenreId",
-                principalTable: "Genre",
+                "FK_StoreArtist_Genre_GenreId",
+                "StoreArtist",
+                "GenreId",
+                "Genre",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_StoreTrack_Genre_GenreId",
-                table: "StoreTrack",
-                column: "GenreId",
-                principalTable: "Genre",
+                "FK_StoreTrack_Genre_GenreId",
+                "StoreTrack",
+                "GenreId",
+                "Genre",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }

@@ -7,20 +7,20 @@ namespace Store.API.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateSequence(
-                name: "catalog_artist_hilo",
+                "catalog_artist_hilo",
                 incrementBy: 10);
 
             migrationBuilder.CreateSequence(
-                name: "catalog_hilo",
+                "catalog_hilo",
                 incrementBy: 10);
 
             migrationBuilder.CreateSequence(
-                name: "genre_hilo",
+                "genre_hilo",
                 incrementBy: 10);
 
             migrationBuilder.CreateTable(
-                name: "Genre",
-                columns: table => new
+                "Genre",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: false),
@@ -33,8 +33,8 @@ namespace Store.API.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "StoreArtist",
-                columns: table => new
+                "StoreArtist",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false),
                     ArtistName = table.Column<string>(maxLength: 100, nullable: false),
@@ -46,16 +46,16 @@ namespace Store.API.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_StoreArtist", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_StoreArtist_Genre_GenreId",
-                        column: x => x.GenreId,
-                        principalTable: "Genre",
-                        principalColumn: "Id",
+                        "FK_StoreArtist_Genre_GenreId",
+                        x => x.GenreId,
+                        "Genre",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "StoreTrack",
-                columns: table => new
+                "StoreTrack",
+                table => new
                 {
                     Id = table.Column<int>(nullable: false),
                     Title = table.Column<string>(maxLength: 50, nullable: false),
@@ -69,65 +69,65 @@ namespace Store.API.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_StoreTrack", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_StoreTrack_StoreArtist_ArtistId",
-                        column: x => x.ArtistId,
-                        principalTable: "StoreArtist",
-                        principalColumn: "Id",
+                        "FK_StoreTrack_StoreArtist_ArtistId",
+                        x => x.ArtistId,
+                        "StoreArtist",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_StoreTrack_Genre_GenreId",
-                        column: x => x.GenreId,
-                        principalTable: "Genre",
-                        principalColumn: "Id",
+                        "FK_StoreTrack_Genre_GenreId",
+                        x => x.GenreId,
+                        "Genre",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_StoreTrack_StoreArtist_StoreArtistId",
-                        column: x => x.StoreArtistId,
-                        principalTable: "StoreArtist",
-                        principalColumn: "Id",
+                        "FK_StoreTrack_StoreArtist_StoreArtistId",
+                        x => x.StoreArtistId,
+                        "StoreArtist",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_StoreArtist_GenreId",
-                table: "StoreArtist",
-                column: "GenreId");
+                "IX_StoreArtist_GenreId",
+                "StoreArtist",
+                "GenreId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StoreTrack_ArtistId",
-                table: "StoreTrack",
-                column: "ArtistId");
+                "IX_StoreTrack_ArtistId",
+                "StoreTrack",
+                "ArtistId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StoreTrack_GenreId",
-                table: "StoreTrack",
-                column: "GenreId");
+                "IX_StoreTrack_GenreId",
+                "StoreTrack",
+                "GenreId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StoreTrack_StoreArtistId",
-                table: "StoreTrack",
-                column: "StoreArtistId");
+                "IX_StoreTrack_StoreArtistId",
+                "StoreTrack",
+                "StoreArtistId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "StoreTrack");
+                "StoreTrack");
 
             migrationBuilder.DropTable(
-                name: "StoreArtist");
+                "StoreArtist");
 
             migrationBuilder.DropTable(
-                name: "Genre");
+                "Genre");
 
             migrationBuilder.DropSequence(
-                name: "catalog_artist_hilo");
+                "catalog_artist_hilo");
 
             migrationBuilder.DropSequence(
-                name: "catalog_hilo");
+                "catalog_hilo");
 
             migrationBuilder.DropSequence(
-                name: "genre_hilo");
+                "genre_hilo");
         }
     }
 }

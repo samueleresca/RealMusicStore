@@ -50,8 +50,7 @@ namespace Store.API.Controllers
             return Ok(model);
         }
 
-        [HttpGet]
-        [Route("/api/artists/{id:int}")]
+        [HttpGet("/api/artists/{id:int}")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(StoreArtistListResponseModel), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetItemById(int id)
@@ -86,8 +85,7 @@ namespace Store.API.Controllers
 
         }
 
-        [HttpGet]
-        [Route("/api/artists/{artistId}/vinyls/")]
+        [HttpGet("/api/artists/{artistId}/vinyls/")]
         [ProducesResponseType(typeof(PaginationResponseModel<StoreVinylListResponseModel>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetByReferencesId(int? artistId, [FromQuery]int pageSize = 10, [FromQuery]int pageIndex = 0)
         {
@@ -111,8 +109,7 @@ namespace Store.API.Controllers
         }
 
         //POST api/v1/[controller]/items
-        [Route("/api/artists")]
-        [HttpPost]
+        [HttpPost("/api/artists")]
         [ProducesResponseType((int)HttpStatusCode.Created)]
         public async Task<IActionResult> CreateArtist([FromBody]CreateArtistRequest request)
         {
@@ -125,8 +122,7 @@ namespace Store.API.Controllers
             return CreatedAtAction(nameof(GetItemById), new { id = result.Id }, null);
         }
 
-        [Route("/api/artists/{id:int}")]
-        [HttpPut]
+        [HttpPut("/api/artists/{id:int}")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.Created)]
         public async Task<IActionResult> UpdateProduct(int id, [FromBody] UpdateArtistRequest request)
@@ -148,8 +144,7 @@ namespace Store.API.Controllers
 
 
         //DELETE api/v1/[controller]/id
-        [Route("/api/artists/{id:int}")]
-        [HttpDelete]
+        [HttpDelete("/api/artists/{id:int}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> DeleteProduct(int id)
         {

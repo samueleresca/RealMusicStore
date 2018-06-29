@@ -7,21 +7,21 @@ namespace Store.API.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_StoreVinyl_StoreGenre_GenreId",
-                table: "StoreVinyl");
+                "FK_StoreVinyl_StoreGenre_GenreId",
+                "StoreVinyl");
 
             migrationBuilder.AlterColumn<int>(
-                name: "GenreId",
-                table: "StoreVinyl",
+                "GenreId",
+                "StoreVinyl",
                 nullable: false,
                 oldClrType: typeof(int),
                 oldNullable: true);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_StoreVinyl_StoreGenre_GenreId",
-                table: "StoreVinyl",
-                column: "GenreId",
-                principalTable: "StoreGenre",
+                "FK_StoreVinyl_StoreGenre_GenreId",
+                "StoreVinyl",
+                "GenreId",
+                "StoreGenre",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -29,20 +29,20 @@ namespace Store.API.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_StoreVinyl_StoreGenre_GenreId",
-                table: "StoreVinyl");
+                "FK_StoreVinyl_StoreGenre_GenreId",
+                "StoreVinyl");
 
             migrationBuilder.AlterColumn<int>(
-                name: "GenreId",
-                table: "StoreVinyl",
+                "GenreId",
+                "StoreVinyl",
                 nullable: true,
                 oldClrType: typeof(int));
 
             migrationBuilder.AddForeignKey(
-                name: "FK_StoreVinyl_StoreGenre_GenreId",
-                table: "StoreVinyl",
-                column: "GenreId",
-                principalTable: "StoreGenre",
+                "FK_StoreVinyl_StoreGenre_GenreId",
+                "StoreVinyl",
+                "GenreId",
+                "StoreGenre",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
         }

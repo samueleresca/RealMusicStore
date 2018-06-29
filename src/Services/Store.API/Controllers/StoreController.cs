@@ -48,8 +48,7 @@ namespace Store.API.Controllers
             return Ok(model);
         }
 
-        [HttpGet]
-        [Route("/api/vinyls/{id:int}")]
+        [HttpGet("/api/vinyls/{id:int}")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(StoreVinylDetailResponseModel), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetItemById(int id)
@@ -85,8 +84,7 @@ namespace Store.API.Controllers
         }
 
 
-        [HttpGet]
-        [Route("/api/vinyls/genre/{genreId}")]
+        [HttpGet("/api/vinyls/genre/{genreId}")]
         [ProducesResponseType(typeof(PaginationResponseModel<StoreVinylDetailResponseModel>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetByGenreReferencesId(int? genreId, [FromQuery]int pageSize = 10, [FromQuery]int pageIndex = 0)
         {
@@ -112,8 +110,7 @@ namespace Store.API.Controllers
 
 
         //POST api/v1/[controller]/items
-        [Route("/api/vinyls")]
-        [HttpPost]
+        [HttpPost("/api/vinyls")]
         [ProducesResponseType((int)HttpStatusCode.Created)]
         public async Task<IActionResult> CreateProduct([FromBody]CreateVinylRequest product)
         {
@@ -127,8 +124,7 @@ namespace Store.API.Controllers
         }
 
         //PUT api/v1/[controller]/items
-        [Route("/api/vinyls/{id:int}")]
-        [HttpPut]
+        [HttpPut("/api/vinyls/{id:int}")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.Created)]
         public async Task<IActionResult> UpdateProduct(int id, [FromBody]UpdateVinylRequest productToUpdate)
@@ -150,8 +146,7 @@ namespace Store.API.Controllers
 
 
         //DELETE api/v1/[controller]/id
-        [Route("/api/vinyls/{id:int}")]
-        [HttpDelete]
+        [HttpDelete("/api/vinyls/{id:int}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> DeleteProduct(int id)
         {

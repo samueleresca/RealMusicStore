@@ -1,15 +1,9 @@
-﻿using System;
-using System.Reflection;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Store.API.Infrastructure.DataAccess;
 using Store.API.Infrastructure.Extensions;
-using Store.API.Repositories;
 
 namespace Store.API
 {

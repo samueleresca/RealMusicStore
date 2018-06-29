@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Store.API.Models;
+﻿using Store.API.Models;
 
 namespace Store.API.Responses
 {

@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
-using Store.API.Models;
 using Store.API.Repositories;
-using Store.API.Requests;
 
 namespace Store.API.Infrastructure.Extensions
 {

@@ -7,66 +7,66 @@ namespace Store.API.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_StoreTrack_StoreArtist_ArtistId",
-                table: "StoreTrack");
+                "FK_StoreTrack_StoreArtist_ArtistId",
+                "StoreTrack");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_StoreTrack_StoreGenre_GenreId",
-                table: "StoreTrack");
+                "FK_StoreTrack_StoreGenre_GenreId",
+                "StoreTrack");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_StoreTrack_StoreArtist_StoreArtistId",
-                table: "StoreTrack");
+                "FK_StoreTrack_StoreArtist_StoreArtistId",
+                "StoreTrack");
 
             migrationBuilder.DropPrimaryKey(
-                name: "PK_StoreTrack",
-                table: "StoreTrack");
+                "PK_StoreTrack",
+                "StoreTrack");
 
             migrationBuilder.RenameTable(
-                name: "StoreTrack",
+                "StoreTrack",
                 newName: "StoreVinyl");
 
             migrationBuilder.RenameIndex(
-                name: "IX_StoreTrack_StoreArtistId",
+                "IX_StoreTrack_StoreArtistId",
                 table: "StoreVinyl",
                 newName: "IX_StoreVinyl_StoreArtistId");
 
             migrationBuilder.RenameIndex(
-                name: "IX_StoreTrack_GenreId",
+                "IX_StoreTrack_GenreId",
                 table: "StoreVinyl",
                 newName: "IX_StoreVinyl_GenreId");
 
             migrationBuilder.RenameIndex(
-                name: "IX_StoreTrack_ArtistId",
+                "IX_StoreTrack_ArtistId",
                 table: "StoreVinyl",
                 newName: "IX_StoreVinyl_ArtistId");
 
             migrationBuilder.AddPrimaryKey(
-                name: "PK_StoreVinyl",
-                table: "StoreVinyl",
-                column: "Id");
+                "PK_StoreVinyl",
+                "StoreVinyl",
+                "Id");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_StoreVinyl_StoreArtist_ArtistId",
-                table: "StoreVinyl",
-                column: "ArtistId",
-                principalTable: "StoreArtist",
+                "FK_StoreVinyl_StoreArtist_ArtistId",
+                "StoreVinyl",
+                "ArtistId",
+                "StoreArtist",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_StoreVinyl_StoreGenre_GenreId",
-                table: "StoreVinyl",
-                column: "GenreId",
-                principalTable: "StoreGenre",
+                "FK_StoreVinyl_StoreGenre_GenreId",
+                "StoreVinyl",
+                "GenreId",
+                "StoreGenre",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_StoreVinyl_StoreArtist_StoreArtistId",
-                table: "StoreVinyl",
-                column: "StoreArtistId",
-                principalTable: "StoreArtist",
+                "FK_StoreVinyl_StoreArtist_StoreArtistId",
+                "StoreVinyl",
+                "StoreArtistId",
+                "StoreArtist",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
         }
@@ -74,66 +74,66 @@ namespace Store.API.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_StoreVinyl_StoreArtist_ArtistId",
-                table: "StoreVinyl");
+                "FK_StoreVinyl_StoreArtist_ArtistId",
+                "StoreVinyl");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_StoreVinyl_StoreGenre_GenreId",
-                table: "StoreVinyl");
+                "FK_StoreVinyl_StoreGenre_GenreId",
+                "StoreVinyl");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_StoreVinyl_StoreArtist_StoreArtistId",
-                table: "StoreVinyl");
+                "FK_StoreVinyl_StoreArtist_StoreArtistId",
+                "StoreVinyl");
 
             migrationBuilder.DropPrimaryKey(
-                name: "PK_StoreVinyl",
-                table: "StoreVinyl");
+                "PK_StoreVinyl",
+                "StoreVinyl");
 
             migrationBuilder.RenameTable(
-                name: "StoreVinyl",
+                "StoreVinyl",
                 newName: "StoreTrack");
 
             migrationBuilder.RenameIndex(
-                name: "IX_StoreVinyl_StoreArtistId",
+                "IX_StoreVinyl_StoreArtistId",
                 table: "StoreTrack",
                 newName: "IX_StoreTrack_StoreArtistId");
 
             migrationBuilder.RenameIndex(
-                name: "IX_StoreVinyl_GenreId",
+                "IX_StoreVinyl_GenreId",
                 table: "StoreTrack",
                 newName: "IX_StoreTrack_GenreId");
 
             migrationBuilder.RenameIndex(
-                name: "IX_StoreVinyl_ArtistId",
+                "IX_StoreVinyl_ArtistId",
                 table: "StoreTrack",
                 newName: "IX_StoreTrack_ArtistId");
 
             migrationBuilder.AddPrimaryKey(
-                name: "PK_StoreTrack",
-                table: "StoreTrack",
-                column: "Id");
+                "PK_StoreTrack",
+                "StoreTrack",
+                "Id");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_StoreTrack_StoreArtist_ArtistId",
-                table: "StoreTrack",
-                column: "ArtistId",
-                principalTable: "StoreArtist",
+                "FK_StoreTrack_StoreArtist_ArtistId",
+                "StoreTrack",
+                "ArtistId",
+                "StoreArtist",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_StoreTrack_StoreGenre_GenreId",
-                table: "StoreTrack",
-                column: "GenreId",
-                principalTable: "StoreGenre",
+                "FK_StoreTrack_StoreGenre_GenreId",
+                "StoreTrack",
+                "GenreId",
+                "StoreGenre",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_StoreTrack_StoreArtist_StoreArtistId",
-                table: "StoreTrack",
-                column: "StoreArtistId",
-                principalTable: "StoreArtist",
+                "FK_StoreTrack_StoreArtist_StoreArtistId",
+                "StoreTrack",
+                "StoreArtistId",
+                "StoreArtist",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
         }
