@@ -17,6 +17,9 @@ namespace Store.API.Infrastructure
             CreateMap<UpdateVinylRequest, StoreViynl>().ReverseMap();
             CreateMap<StoreVinylDetailResponseModel, StoreViynl>().ReverseMap();
             CreateMap<StoreVinylListResponseModel, StoreViynl>().ReverseMap();
+            CreateMap<StoreArtistListResponseModel, StoreArtist>().ReverseMap();
+            CreateMap<CreateArtistRequest, StoreArtist>().ReverseMap();
+            CreateMap<UpdateArtistRequest, StoreArtist>().ReverseMap();
         }
     }
 }

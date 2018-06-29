@@ -53,7 +53,7 @@ namespace Store.API.Controllers
         [HttpGet]
         [Route("/api/artists/{id:int}")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        [ProducesResponseType(typeof(StoreVinylDetailResponseModel), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(StoreArtistListResponseModel), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetItemById(int id)
         {
             if (id <= 0)
@@ -88,7 +88,7 @@ namespace Store.API.Controllers
 
         [HttpGet]
         [Route("/api/artists/{artistId}/vinyls/")]
-        [ProducesResponseType(typeof(PaginationResponseModel<StoreVinylDetailResponseModel>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(PaginationResponseModel<StoreVinylListResponseModel>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetByReferencesId(int? artistId, [FromQuery]int pageSize = 10, [FromQuery]int pageIndex = 0)
         {
             if (!artistId.HasValue)
@@ -104,8 +104,8 @@ namespace Store.API.Controllers
             var itemsOnPage = results.Vinyls.AsEnumerable()
                 .Paginate(pageIndex, pageSize);
 
-            var model = new PaginationResponseModel<StoreArtistListResponseModel>(
-                pageIndex, pageSize, totalItems, _autoMapper.Map<IEnumerable<StoreArtistListResponseModel>>(itemsOnPage));
+            var model = new PaginationResponseModel<StoreVinylListResponseModel>(
+                pageIndex, pageSize, totalItems, _autoMapper.Map<IEnumerable<StoreVinylListResponseModel>>(itemsOnPage));
 
             return Ok(model);
         }
