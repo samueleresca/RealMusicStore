@@ -20,7 +20,7 @@ namespace Store.API.Repositories
 
         public async Task<IEnumerable<StoreArtist>> GetAll()
         {
-            return await  _dbContext.StoreArtists
+            return await _dbContext.StoreArtists
                 .AsNoTracking()
                 .ToListAsync();
         }
@@ -37,8 +37,8 @@ namespace Store.API.Repositories
             return await _dbContext
                 .StoreArtists
                 .AsNoTracking()
-                .Include(_ => _.Vinyls)
-                .FirstOrDefaultAsync(e => e.Id == id);
+                .FirstOrDefaultAsync(_ => _.Id == id);
+
         }
 
         public async Task<StoreArtist> Create(StoreArtist entity)

@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace Store.API.Models
+﻿namespace Store.API.Responses
 {
-    public class Genre
+    public class StoreGenreListResponseModel
     {
         public int Id { get; set; }
         public string Description { get; set; }

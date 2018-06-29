@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Store.API.Models
+﻿namespace Store.API.Requests
 {
-    public class Genre
+    public class UpdateGenreRequest
     {
-        public int Id { get; set; }
         public string Description { get; set; }
         public string Title { get; set; }
         public bool IsDisabled { get; set; }

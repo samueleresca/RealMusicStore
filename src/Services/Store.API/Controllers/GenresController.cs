@@ -13,24 +13,24 @@ using Store.API.Responses;
 namespace Store.API.Controllers
 {
 
-    [Route("api/artists")]
-    public class ArtistsController : Controller
+    [Route("api/genres")]
+    public class GenresController : Controller
     {
-        private readonly IStoreArtistRepository _storeArtistRepository;
+        private readonly IStoreGenreRepository _storeGenreRepository;
         private readonly IStoreViynlRepository _storeViynlRepository;
         private readonly IMapper _autoMapper;
 
-        public ArtistsController(IStoreArtistRepository storeArtistRepository, IMapper autoMapper, IStoreViynlRepository storeViynlRepository)
+        public GenresController(IStoreGenreRepository storeGenreRepository, IMapper autoMapper, IStoreViynlRepository storeViynlRepository)
         {
-            _storeArtistRepository = storeArtistRepository;
+            _storeGenreRepository = storeGenreRepository;
             _autoMapper = autoMapper;
             _storeViynlRepository = storeViynlRepository;
         }
 
 
-        [HttpGet("/api/artists")]
-        [ProducesResponseType(typeof(PaginationResponseModel<StoreArtistListResponseModel>), (int)HttpStatusCode.OK)]
-        [ProducesResponseType(typeof(IEnumerable<StoreArtistListResponseModel>), (int)HttpStatusCode.OK)]
+        [HttpGet("/api/genres")]
+        [ProducesResponseType(typeof(PaginationResponseModel<StoreGenreListResponseModel>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IEnumerable<StoreGenreListResponseModel>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetAll([FromQuery]int pageSize = 10, [FromQuery]int pageIndex = 0, [FromQuery] string ids = null)
         {
             if (!string.IsNullOrEmpty(ids))
@@ -38,23 +38,22 @@ namespace Store.API.Controllers
                 return await GetItemsByIds(ids);
             }
 
-            var result = await _storeArtistRepository.GetAll();
+            var result = await _storeGenreRepository.GetAll();
 
             var totalItems = result.LongCount();
 
             var itemsOnPage = result
-                .OrderBy(c => c.ArtistName)
                 .Paginate(pageIndex, pageSize);
 
-            var model = new PaginationResponseModel<StoreArtistListResponseModel>(
-                pageIndex, pageSize, totalItems, _autoMapper.Map<IEnumerable<StoreArtistListResponseModel>>(itemsOnPage));
+            var model = new PaginationResponseModel<StoreGenreListResponseModel>(
+                pageIndex, pageSize, totalItems, _autoMapper.Map<IEnumerable<StoreGenreListResponseModel>>(itemsOnPage));
 
             return Ok(model);
         }
 
-        [HttpGet("/api/artists/{id:int}")]
+        [HttpGet("/api/genres/{id:int}")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        [ProducesResponseType(typeof(StoreArtistListResponseModel), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(StoreGenreListResponseModel), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetItemById(int id)
         {
             if (id <= 0)
@@ -62,11 +61,11 @@ namespace Store.API.Controllers
                 return BadRequest();
             }
 
-            var item = await _storeArtistRepository.Find(ci => ci.Id == id);
+            var item = await _storeGenreRepository.Find(ci => ci.Id == id);
 
             if (item.Any())
             {
-                return Ok(_autoMapper.Map<IEnumerable<StoreArtistListResponseModel>>(item));
+                return Ok(_autoMapper.Map<IEnumerable<StoreGenreListResponseModel>>(item));
             }
 
             return NotFound();
@@ -82,21 +81,21 @@ namespace Store.API.Controllers
             }
 
             var idsToSelect = numIds.Select(id => id.Value);
-            var items = await _storeArtistRepository.Find(ci => idsToSelect.Contains(ci.Id));
+            var items = await _storeGenreRepository.Find(ci => idsToSelect.Contains(ci.Id));
             return Ok(items);
 
         }
 
-        [HttpGet("/api/artists/{artistId}/vinyls/")]
+        [HttpGet("/api/genres/{genreId}/vinyls/")]
         [ProducesResponseType(typeof(PaginationResponseModel<StoreVinylListResponseModel>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetByReferencesId(int? artistId, [FromQuery]int pageSize = 10, [FromQuery]int pageIndex = 0)
+        public async Task<IActionResult> GetByReferencesId(int? genreId, [FromQuery]int pageSize = 10, [FromQuery]int pageIndex = 0)
         {
-            if (!artistId.HasValue)
+            if (!genreId.HasValue)
             {
                 return NotFound();
             }
 
-            var results = await _storeViynlRepository.Find(_ => _.ArtistId == artistId);
+            var results = await _storeViynlRepository.Find(_ => _.GenreId == genreId);
 
             var totalItems = results
                 .LongCount();
@@ -111,53 +110,53 @@ namespace Store.API.Controllers
         }
 
         //POST api/v1/[controller]/items
-        [HttpPost("/api/artists")]
+        [HttpPost("/api/genres")]
         [ProducesResponseType((int)HttpStatusCode.Created)]
-        public async Task<IActionResult> CreateArtist([FromBody]CreateArtistRequest request)
+        public async Task<IActionResult> CreateArtist([FromBody] CreateGenreRequest request)
         {
             if (request == null)
             {
                 return BadRequest();
             }
 
-            var result = await _storeArtistRepository.Create(_autoMapper.Map<StoreArtist>(request));
+            var result = await _storeGenreRepository.Create(_autoMapper.Map<Genre>(request));
             return CreatedAtAction(nameof(GetItemById), new { id = result.Id }, null);
         }
 
-        [HttpPut("/api/artists/{id:int}")]
+        [HttpPut("/api/genres/{id:int}")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.Created)]
-        public async Task<IActionResult> UpdateProduct(int id, [FromBody] UpdateArtistRequest request)
+        public async Task<IActionResult> UpdateProduct(int id, [FromBody] UpdateGenreRequest request)
         {
-            var catalogItem = await _storeArtistRepository.GetById(id);
+            var catalogItem = await _storeGenreRepository.GetById(id);
 
             if (catalogItem == null)
             {
                 return NotFound(new { Message = $"Item with id {id} not found." });
             }
             // Update current request
-            catalogItem = _autoMapper.Map<StoreArtist>(request);
+            catalogItem = _autoMapper.Map<Genre>(request);
 
             catalogItem.Id = id;
-            await _storeArtistRepository.Update(catalogItem);
+            await _storeGenreRepository.Update(catalogItem);
 
             return CreatedAtAction(nameof(GetItemById), new { id }, null);
         }
 
 
         //DELETE api/v1/[controller]/id
-        [HttpDelete("/api/artists/{id:int}")]
+        [HttpDelete("/api/genres/{id:int}")]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         public async Task<IActionResult> DeleteProduct(int id)
         {
-            var product = await _storeArtistRepository.Find(x => x.Id == id);
+            var product = await _storeGenreRepository.Find(x => x.Id == id);
 
             if (product == null)
             {
                 return NotFound();
             }
 
-            await _storeArtistRepository.Delete(id);
+            await _storeGenreRepository.Delete(id);
             return NoContent();
         }
 

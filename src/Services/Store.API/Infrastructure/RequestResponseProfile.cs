@@ -5,17 +5,22 @@ using Store.API.Responses;
 
 namespace Store.API.Infrastructure
 {
-    public class AutomapperProfile : Profile
+    public class RequestResponseProfile : Profile
     {
-        public AutomapperProfile()
+        public RequestResponseProfile()
         {
             CreateMap<CreateVinylRequest, StoreViynl>().ReverseMap();
             CreateMap<UpdateVinylRequest, StoreViynl>().ReverseMap();
             CreateMap<StoreVinylDetailResponseModel, StoreViynl>().ReverseMap();
             CreateMap<StoreVinylListResponseModel, StoreViynl>().ReverseMap();
+
             CreateMap<StoreArtistListResponseModel, StoreArtist>().ReverseMap();
             CreateMap<CreateArtistRequest, StoreArtist>().ReverseMap();
             CreateMap<UpdateArtistRequest, StoreArtist>().ReverseMap();
+
+            CreateMap<StoreGenreListResponseModel, Genre>().ReverseMap();
+            CreateMap<CreateGenreRequest, Genre>().ReverseMap();
+            CreateMap<UpdateGenreRequest, Genre>().ReverseMap();
         }
     }
 }

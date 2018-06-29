@@ -14,12 +14,12 @@ namespace Store.API.Controllers
 {
     [Route("api/vinyls")]
     [ApiController]
-    public class StoreController : ControllerBase
+    public class VinylsController : ControllerBase
     {
         private readonly IStoreViynlRepository _storeViynlRepository;
         private readonly IMapper _autoMapper;
 
-        public StoreController(IStoreArtistRepository storeArtistRepository, IStoreViynlRepository storeViynlRepository, IStoreGenreRepository storeGenreRepository, IMapper autoMapper)
+        public VinylsController(IStoreArtistRepository storeArtistRepository, IStoreViynlRepository storeViynlRepository, IStoreGenreRepository storeGenreRepository, IMapper autoMapper)
         {
             _storeViynlRepository = storeViynlRepository;
             _autoMapper = autoMapper;
@@ -107,7 +107,6 @@ namespace Store.API.Controllers
 
             return Ok(model);
         }
-
 
         //POST api/v1/[controller]/items
         [HttpPost("/api/vinyls")]

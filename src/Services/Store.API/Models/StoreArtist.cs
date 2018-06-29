@@ -8,6 +8,5 @@ namespace Store.API.Models
         public string ArtistName { get; set; }
         public string Description { get; set; }
         public bool IsDisabled { get; set; }
-        public virtual ICollection<StoreViynl> Vinyls { get; set; }
     }
 }
